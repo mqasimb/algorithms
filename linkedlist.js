@@ -100,6 +100,22 @@ LinkedList.prototype.reverseLinkedList = function() {
     return this.head;
 }
 
+LinkedList.prototype.findCycle = function() {
+    var fast = this.head, slow = this.head;
+    var count = 0;
+    while(fast) {
+        fast = fast.next;
+        if(count>=3) {
+            slow = slow.next;
+        }
+        count++;
+        if(fast === slow) {
+            return true;
+        }
+    }
+    return false;
+}
+
 var newList = new LinkedList();
 newList.insert(0,1);
 newList.insert(1,2);
@@ -118,3 +134,6 @@ console.log(newList.findMiddleElement());
 console.log(newList.findThirdToLastElement());
 console.log(newList.reverseLinkedList());
 console.log(newList.head.next);
+console.log(newList.findCycle());
+newList.head.next.next.next.next.next = newList.head.next.next;
+console.log(newList.findCycle());
